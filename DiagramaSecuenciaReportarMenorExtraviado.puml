@@ -1,0 +1,199 @@
+@startuml
+title Diagrama de Secuencia "Reportar Menor Extraviado"
+
+Actor Usuario
+box "SmartCDMX" #ff4081
+participant ModuloExtraviodeMenor
+end box
+box "Cloud appcelerator" #LightBlue
+participant apiExtravioDeMenor
+database DB
+participant apiCloudAppc
+end box
+participant apiC5
+Actor Usuarios_de_SmartCDMX
+
+activate Usuario
+Usuario->ModuloExtraviodeMenor:Selecciona el Módulo "Extravío de Menor"
+activate ModuloExtraviodeMenor
+note left:El usuario ya esta \ndentro de la aplicación \nSmartCDMX
+ModuloExtraviodeMenor-->Usuario:Muestra formulario para ingresar datos del menor extraviado
+Usuario->ModuloExtraviodeMenor:Ingresa los datos requeridos para buscar al menor de edad y oprime "Enviar"
+note left:Datos a ingresar:\n\n*Fotografía(imagen)\n*Nombre(s)\n*Apellidos\n*Fecha de nacimiento\n*Fecha de los Hechos\n*Género\n*Nacionalidad\n*Cabello\n*Color de cabello\n*Color de ojos\n*estatura(cm)\n*peso(kg)\n*Señas particulares\n*Lugar de los Hechos\n*Descripción de los hechos\n\nInformación del denunciante:\n*Nombre completo\n*Parentesco\n*teléfono
+ModuloExtraviodeMenor->ModuloExtraviodeMenor:Validar los Datos \nIngresados
+activate ModuloExtraviodeMenor
+note left: Los datos obligatorios son:\nFotografía,Nombre(s),apellidos,fecha de nacimiento\nFecha de los hechos, género,señas particulares.\n\ny datos del denunciante: Nombre,apellido,teléfono
+
+  group Datos Validos
+    ModuloExtraviodeMenor->apiExtravioDeMenor:POST https://ac7ad0ddc76ca13d5af57c69f96c597f966cca9d.cloudapp-enterprise.appcelerator.com/api/reporteExtravioDeMenor
+    deactivate ModuloExtraviodeMenor
+    activate apiExtravioDeMenor
+    apiExtravioDeMenor->apiExtravioDeMenor: Validar datos
+    note right: verifica que los datos enviados correspondan al tipo de dato \ny que los campos obligatorios no vengan vacios respecto a \nla base de datos
+    activate apiExtravioDeMenor
+
+    apiExtravioDeMenor->DB:Insert(Fotografía,Nombre(s),Apellidos,Fecha de nacimiento,Fecha de los Hechos,Género,Nacionalidad,\nCabello,Color de cabello,Color de ojos,estatura(cm),peso(kg),Señas particulares,Lugar de los Hechos,\nDescripción de los hechos,Nombre_contacto,Parentesco_contacto,teléfono_contacto)
+    activate DB
+    alt Error en el Insert
+      DB-->apiExtravioDeMenor:Error
+      activate DB
+    else Los datos enviados no corresponden con el tipo de la base de datos
+      apiExtravioDeMenor-->ModuloExtraviodeMenor:Response({"code":400})
+      Usuario<--ModuloExtraviodeMenor:Muestra alert "Datos inválidos"
+      note left:Contenido del alert \nTitulo: "Datos inválidos"\nMensaje: "Error al guardar los \ndatos, Verificalos porfavor"\nBotón: "Aceptar"
+      Usuario->ModuloExtraviodeMenor:El usuario presiona el botón "Aceptar" del alert
+      Usuario<--ModuloExtraviodeMenor:cierra el alert
+
+    else Error con el Servidor
+      apiExtravioDeMenor-->ModuloExtraviodeMenor:Response({"code":500})
+      note left:Al recibir el codigo 500 los datos \nse reenvían despues de 5 minutos
+      ModuloExtraviodeMenor->ModuloExtraviodeMenor:reenvioDatos500()
+      activate ModuloExtraviodeMenor
+      ModuloExtraviodeMenor->apiExtravioDeMenor:POST https://ac7ad0ddc76ca13d5af57c69f96c597f966cca9d.cloudapp-enterprise.appcelerator.com/api/reporteExtravioDeMenor
+      deactivate ModuloExtraviodeMenor
+      apiExtravioDeMenor->DB:Insert(Fotografía,Nombre(s),Apellidos,Fecha de nacimiento,Fecha de los Hechos,Género,Nacionalidad,\nCabello,Color de cabello,Color de ojos,estatura(cm),peso(kg),Señas particulares,Lugar de los Hechos,\nDescripción de los hechos,Nombre_contacto,Parentesco_contacto,teléfono_contacto)
+
+    else Tiempo de respuesta del Servidor agotado
+      apiExtravioDeMenor-->ModuloExtraviodeMenor:Response({"code":504})
+      note left:Al recibir el codigo 504 los \ndatos se reenvían inmediatamente\n\n*Solo se intentara 2 veces de lo \ncontrario se tratara como error con el Servidor
+      ModuloExtraviodeMenor->ModuloExtraviodeMenor:reenvioDatos504()
+      activate ModuloExtraviodeMenor
+      ModuloExtraviodeMenor->apiExtravioDeMenor:POST https://ac7ad0ddc76ca13d5af57c69f96c597f966cca9d.cloudapp-enterprise.appcelerator.com/api/reporteExtravioDeMenor
+      deactivate ModuloExtraviodeMenor
+      apiExtravioDeMenor->DB:Insert(Fotografía,Nombre(s),Apellidos,Fecha de nacimiento,Fecha de los Hechos,Género,Nacionalidad,\nCabello,Color de cabello,Color de ojos,estatura(cm),peso(kg),Señas particulares,Lugar de los Hechos,\nDescripción de los hechos,Nombre_contacto,Parentesco_contacto,teléfono_contacto)
+    end
+    DB-->apiExtravioDeMenor:Successfully
+    deactivate DB
+    deactivate DB
+
+    apiExtravioDeMenor->apiCloudAppc: iniciarSesion()
+    activate apiCloudAppc
+    alt Error al Iniciar Sesión para enviar Push
+      apiExtravioDeMenor<--apiCloudAppc: error
+      activate apiCloudAppc
+      apiExtravioDeMenor-->ModuloExtraviodeMenor:Response({"code":401})
+      note left:*Solo se intentara 1 veces de lo \ncontrario se mantiene el insert pero \nno se envia la push
+      activate ModuloExtraviodeMenor
+      ModuloExtraviodeMenor->apiCloudAppc: iniciarSesion()
+      deactivate ModuloExtraviodeMenor
+    end
+    apiExtravioDeMenor<--apiCloudAppc: success
+    deactivate apiCloudAppc
+    deactivate apiCloudAppc
+
+    apiExtravioDeMenor->apiExtravioDeMenor: enviarPushNotifications()
+    note left:Como se envian las push se espeficica en otro\n diagrama de secuencia(diagramaSecuenciaEnvioPush)
+    activate apiExtravioDeMenor
+    apiExtravioDeMenor->Usuarios_de_SmartCDMX:Envio de Push Notifications
+    activate Usuarios_de_SmartCDMX
+    alt Error
+      apiExtravioDeMenor<--Usuarios_de_SmartCDMX: Error
+      activate Usuarios_de_SmartCDMX
+      apiExtravioDeMenor-->ModuloExtraviodeMenor:Response({"code":500})
+      ModuloExtraviodeMenor->apiExtravioDeMenor:enviarPushNotifications()
+      note left:*Solo se intentara 1 veces de lo \ncontrario se mantiene el insert pero \nno se envia la push
+      apiExtravioDeMenor->Usuarios_de_SmartCDMX:Envio de Push Notifications
+    end
+    apiExtravioDeMenor<--Usuarios_de_SmartCDMX: Success
+    deactivate apiExtravioDeMenor
+    deactivate apiExtravioDeMenor
+
+    apiExtravioDeMenor->apiC5:enviarDatosApiC5()
+    note left:El envio de datos a C5 se realiza independiente \na lo que contesto tanto la api al ingresar datos a \nla base de datos y la respuesta de las push
+    activate apiC5
+    alt Error con apiC5
+      apiC5-->apiExtravioDeMenor:Response({"code":500})
+      activate apiC5
+      apiExtravioDeMenor-->ModuloExtraviodeMenor:Response({"code":500})
+      note left:Al recibir el codigo 500 los datos \nse reenvían despues de 5 minutos
+      activate ModuloExtraviodeMenor
+      ModuloExtraviodeMenor->apiExtravioDeMenor:reenvioDatosC5()
+      deactivate ModuloExtraviodeMenor
+      apiExtravioDeMenor->apiC5:enviarDatosApiC5()
+    end
+    apiC5-->apiExtravioDeMenor:Response({"code":200})
+    note right:Los datos enviados son: \nFotografía(imagen),Nombre(s),Apellidos,Fecha de nacimiento\nFecha de los Hechos,Género,Nacionalidad,Cabello,Color de cabello\nColor de ojos,estatura(cm),peso(kg),Señas particulares,Lugar de los Hechos\nDescripción de los hechos\n\nInformación del denunciante:\nNombre completo,Parentesco,teléfono
+    deactivate apiC5
+    deactivate apiC5
+
+    apiExtravioDeMenor-->ModuloExtraviodeMenor:Response({"code":200})
+    alt Tipos de Mensaje respecto a las Respuestas de las apis
+      else Error del Servidor, sin Push Notifications, con envío a C5
+        Usuario<--ModuloExtraviodeMenor:Muestra alert "Procesando Datos"
+        note left:Contenido del alert \nTitulo: "Procesando Datos"\nMensaje: "Fue Notificada la Policia \ny se esta procesando para avisar \na los Usuarios de SmartCDMX"\nBotón: "Aceptar"
+        Usuario->ModuloExtraviodeMenor:El usuario presiona el botón "Aceptar" del alert
+        Usuario<--ModuloExtraviodeMenor:cierra el alert
+
+      else Insert correcto, sin Push Notifications, con envío a C5
+        Usuario<--ModuloExtraviodeMenor:Muestra alert "Datos Procesados"
+        note left:Contenido del alert \nTitulo: "Datos Procesados"\nMensaje: "Fue Notificada la Policia \ny tu alerta esta guardada en SmartCDMX \npara que sus Usuarios la puedan ver"\nBotón: "Aceptar"
+        Usuario->ModuloExtraviodeMenor:El usuario presiona el botón "Aceptar" del alert
+        Usuario<--ModuloExtraviodeMenor:cierra el alert
+
+      else Insert correcto, con Push Notifications, sin envío a C5
+        Usuario<--ModuloExtraviodeMenor:Muestra alert "Datos Guardados"
+        note left:Contenido del alert \nTitulo: "Datos Guardados"\nMensaje: "Los Usuarios de SmartCDMX fueron Notificados \ny te estan ayudando, aunque ocurrio un error al contactar \na la policia"\nBotónes: "Reintentar, Cancelar"
+        group event: Botón Reintentar
+          Usuario->ModuloExtraviodeMenor:Oprime el botón "Reintentar"
+          ModuloExtraviodeMenor->apiExtravioDeMenor:reenvioDatosC5()
+          else Botón Cancelar
+            Usuario->ModuloExtraviodeMenor:Oprime el botón "Reintentar"
+            ModuloExtraviodeMenor-->Usuario:Cierra el alert
+        end
+
+        else Insert correcto, sin Push Notifications, sin envío a C5
+          Usuario<--ModuloExtraviodeMenor:Muestra alert "Datos Guardados"
+          note left:Contenido del alert \nTitulo: "Datos Guardados"\nMensaje: "Tu alerta esta guardada en SmartCDMX \npara que sus Usuarios la puedan ver, \naunque ocurrio un error al contactar a la policia"\nBotónes: "Reintentar, Cancelar"
+          group event: Botón Reintentar
+            Usuario->ModuloExtraviodeMenor:Oprime el botón "Reintentar"
+            ModuloExtraviodeMenor->apiExtravioDeMenor:reenvioDatosC5()
+            else Botón Cancelar
+              Usuario->ModuloExtraviodeMenor:Oprime el botón "Reintentar"
+              ModuloExtraviodeMenor-->Usuario:Cierra el alert
+          end
+
+      else Error del Servidor, sin Push Notifications, sin envío a C5
+      ModuloExtraviodeMenor-->Usuario:Muestra un alert de Error en el envío de Datos
+      note left:Contenido del alert \nTitulo: "Error"\nMensaje: "Existen Errores de RED, Ya sea \ncon tu dispositivo o los servicios"\nBotónes: "Reintentar, Cancelar"
+        group event: Botón Reintentar
+          Usuario->ModuloExtraviodeMenor:Oprime el botón "Reintentar"
+          ModuloExtraviodeMenor->apiExtravioDeMenor:POST https://ac7ad0ddc76ca13d5af57c69f96c597f966cca9d.cloudapp-enterprise.appcelerator.com/api/reporteExtravioDeMenor
+          else Botón Cancelar
+            Usuario->ModuloExtraviodeMenor:Oprime el botón "Reintentar"
+            ModuloExtraviodeMenor-->Usuario:Cierra el alert
+        end
+    end
+    deactivate apiExtravioDeMenor
+    ModuloExtraviodeMenor-->Usuario:Muestra un alert de confirmación en el envío de Datos
+    note left:Contenido del alert \nTitulo: "Datos Enviados"\nMensaje: "Tu Alerta fue enviada con Exito a la\nPolicia y los Usuarios de SmartCDMX"\nBotón: "Aceptar"
+    Usuario->ModuloExtraviodeMenor:Oprime el botón 'Aceptar' del Alert
+    ModuloExtraviodeMenor-->Usuario:Cierra el alert
+
+  else Datos invàlidos
+    Usuario<--ModuloExtraviodeMenor:Muestra alert "Datos inválidos"
+    note left:Contenido del alert \nTitulo: "Datos inválidos"\nMensaje: "Corrige los siguientes datos:"\n*Mostrara el nombre de los campos a corregir\nBotón: "Aceptar"
+    Usuario->ModuloExtraviodeMenor:El usuario presiona el botón "Aceptar" del alert
+    Usuario<--ModuloExtraviodeMenor:cierra el alert
+    note left: El formulario mantiene los datos correctos\n que ingreso anteriormente y se borrarán\n los datos incorrectos
+  end
+
+  alt Lista de Alertas
+    Usuario->ModuloExtraviodeMenor:Oprime el botón "Lista de Alertas"
+    ModuloExtraviodeMenor-->Usuario:Muestra la Ventana con la Lista de Desaparecidos
+    Usuario->ModuloExtraviodeMenor:Selecciona y Oprime el Nombre de algun Desaparecido
+    note right:La Ventana "Información Completa"\nmuestra toda la Información del Desaparecido
+    ModuloExtraviodeMenor-->Usuario:Muestra la Ventana "Información Completa"
+    group event: Botón Reintentar
+      Usuario->ModuloExtraviodeMenor:Oprime el botón "Enviar Notificación"
+      ModuloExtraviodeMenor-->Usuario:Muestra la Ventana "Aportacion de Información"
+      Usuario->ModuloExtraviodeMenor:Ingresa alguna Información de los Hechos y oprime enviar
+      ModuloExtraviodeMenor->apiExtravioDeMenor:PUT https://ac7ad0ddc76ca13d5af57c69f96c597f966cca9d.cloudapp-enterprise.appcelerator.com/api/reporteExtravioDeMenor
+      activate apiExtravioDeMenor
+      note right:Los Datos a actualizar son:\n*Descripción de los Hechos\n*Lugar de los Hechos\nEsta ultima como referencia del\nultimo paradero del desaparecido
+      apiExtravioDeMenor->DB:Update(Lugar de los Hechos, Descripción de los hechos)
+      activate DB
+      note left:Todo el proceso del Update es similar al POST,\ndebe actualizar la base de datos, enviar las Push\nNotifications y avisar a C5\n\nSi existen errores se debe resolver igual que en\nel POST anterior junto con sus posibles mensajes
+      deactivate DB
+    end
+  end
+@enduml

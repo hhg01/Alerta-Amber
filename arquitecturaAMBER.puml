@@ -1,0 +1,33 @@
+@startuml
+
+title "Arquitectura Módulo Extravio de Menor para SmartCDMX app"
+
+  interface "HTTP" as HTTP1
+  interface "HTTP" as HTTP2
+
+package "Aplicación Móvil: SmartCDMX"{
+  [Módulo Extravio de Menor]
+}
+
+cloud "Cloud Appcelerator"{
+  [API Extravio de Menor]
+  database "BD Niño Extraviado" {
+      [bd_niñoExtraviado\n(API Builder)]
+    }
+}
+
+database "bd_niñoExtraviado\n(API Builder)"
+
+cloud "Servidor C5"{
+  [API C5]
+}
+
+[Módulo Extravio de Menor] <-> HTTP1: se comunica con
+HTTP1 <-> [API Extravio de Menor]
+[bd_niñoExtraviado\n(API Builder)] <-> [API Extravio de Menor]
+
+[API Extravio de Menor] <-> HTTP2: se comunica con
+HTTP2 <-> [API C5]
+
+
+@enduml
