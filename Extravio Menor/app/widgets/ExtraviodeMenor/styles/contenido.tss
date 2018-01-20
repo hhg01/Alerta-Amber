@@ -1,0 +1,343 @@
+".container" : {
+	backgroundColor:"white",
+	layout:"vertical"
+}
+"#scroll":{
+	layout:"vertical"
+}
+
+/*++++++++++++++++++++BLOQUE DEL CONTENIDO DEL MENU++++++++++++++++++++++*/
+"#menu":{
+	backgroundColor:"grey",
+	width:"100%",
+	height:"15%",
+	layout:"horizontal"
+}
+
+"#menuBotodesLlamada":{
+	width:"80%",
+	height:"100%"
+}
+"#menuBotodesAlertas":{
+	width:"20%",
+	height:"100%"
+}
+
+"#alertas":{
+	image:"/images/file.png",
+	width:"100%",
+	height:"100%"
+}
+
+/*++++++++++++++++++++BLOQUE DEL CONTENIDO DE LA FOTO++++++++++++++++++++++*/
+"#camposFoto":{
+	backgroundColor:"grey",
+	width:"100%",
+	height:"60%",
+	layout:"vertical"
+}
+"#camposFotoTitulo":{
+	text:"Solicitud",
+	color:"black",
+	font:{
+		size:50,
+		fontWeight: 'bold'
+	}	
+}
+"#camposFotoFoto":{
+	width:"60%",
+	height:"60%",
+	image: '/images/focusing-target-to-take-a-photo.png'
+}
+"#camposFotoBotones":{
+	width:"100%",
+	height:"25%",
+	layout:"horizontal"
+}
+".divisorView":{
+	width:"50%",
+	height:"80%",
+	layout:"vertical"
+}
+"#camposFotoBotonesCamara":{
+	image: '/images/photo-camera.png',
+	textAlign:"center",
+	width:"40%",
+	height:"100%"
+}
+"#camposFotoBotonesArchivos":{
+	image: '/images/clip.png',
+	width:"40%",
+	height:"100%"
+}
+
+/*++++++++++++++++++++BLOQUE DEL CONTENIDO DE DATOS DEL MENOR++++++++++++++++++++++*/
+"#datosMenor":{
+	backgroundColor:"grey",
+	width:"100%",
+	height:"65%",
+	layout:"vertical"
+}
+"#datosMenorTexto":{
+	text:"*campos obligatorios",
+	color:"black",
+	font:{
+		size:50,
+		fontWeight: 'bold'
+	}
+}
+".datosMenorView":{
+	width:"100%",
+	height:"20%",
+	layout:"horizontal"
+}
+"#nombre":{
+	text:"*Nombre(s): ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textNombre":{
+	height:"80%",
+	width:"100%",
+	color:"black"
+}
+"#apellido":{
+	text:"*Apellidos: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textApellido":{
+	height:"80%",
+	width:"100%",
+	color:"black"
+}
+"#fechaNacimiento":{
+	text:"*Facha de Nacimiento: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#labelFechaNacimiento":{
+	color:"blue",
+	font:{
+		size:30,
+		fontStyle: 'italic'
+	}
+}
+"#fechaHechos":{
+	text:"*Fecha de los Hechos: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#labelFechaHechos":{
+	color:"blue",
+	font:{
+		size:30,
+		fontStyle: 'italic'
+	}
+}
+"#genero":{
+	text:"*Género: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+".picker":{
+	backgroundColor:"black",
+	height:"80%",
+	width:"90%"
+}
+
+/*++++++++++++++++++++BLOQUE DEL CONTENIDO DETALLES DEL MENOR++++++++++++++++++++++*/
+"#descripcionMenor":{
+	backgroundColor:"grey",
+	width:"100%",
+	height:"50%",
+	layout:"vertical"
+}
+".descripcionMenorView":{
+	width:"100%",
+	height:"20%",
+	layout:"horizontal"
+}
+"#nacionalidad":{
+	text:"Nacionalidad: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#cabello":{
+	text:"Cabello: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#colorCabello":{
+	text:"Color de Cabello: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#colorOjos":{
+	text:"Color de Ojos: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#estatura":{
+	text:"Estatura(cm): ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textEstatura":{
+	height:"90%",
+	width:"20%",
+	color:"black",
+	keyboardType : Ti.UI.KEYBOARD_NUMBER_PAD
+}
+"#peso":{
+	text:"Peso(kg): ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textPeso":{
+	height:"90%",
+	width:"20%",
+	color:"black",
+	keyboardType:Ti.UI.KEYBOARD_NUMBER_PAD
+}
+
+/*++++++++++++++++++++BLOQUE DEL CONTENIDO DE DESCRIPCION DE LOS HECHOS++++++++++++++++++++++*/
+"#descripcionHechos":{
+	backgroundColor:"grey",
+	width:"100%",
+	height:"80%",
+	layout:"vertical"
+}
+"#señas":{
+	text:"*Señas Particulares: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textSeñas":{
+	height:"100%",
+	width:"100%",
+	color:"black"
+}
+"#textMapa":{
+	text:"Lugar de los Hechos: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#mapa":{
+	backgroundColor:"white",
+	width:"100%",
+	height:"50%",
+	top:"2%"
+}
+/*++++++++++++++++++++BLOQUE DEL CONTENIDO DE DATOS DEL CONTACTO++++++++++++++++++++++*/
+"#datosContacto":{
+	backgroundColor:"grey",
+	width:"100%",
+	height:"85%",
+	layout:"vertical"
+}
+"#descripcion":{
+	text:"Descripción de los Hechos: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textDescripcion":{
+	height:"100%",
+	width:"100%",
+	color:"black"
+}
+"#datosContactoText":{
+	text:"Datos del Contacto",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+".descripcionMenorView2":{
+	width:"100%",
+	height:"15%",
+	layout:"horizontal"
+}
+"#nombreParentesco":{
+	text:"*Nombre: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textNombreP":{
+	height:"70%",
+	width:"60%",
+	color:"black"
+}
+"#parentesco":{
+	text:"*Parentesco: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textParentesco":{
+	height:"70%",
+	width:"60%",
+	color:"black"
+}
+"#telefono":{
+	text:"*Teléfono: ",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
+"#textTelefono":{
+	height:"70%",
+	width:"60%",
+	color:"black",
+	keyboardType : Ti.UI.KEYBOARD_NUMBER_PAD
+}

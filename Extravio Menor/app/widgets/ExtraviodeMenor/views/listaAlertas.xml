@@ -1,0 +1,15 @@
+<Alloy>
+	<Window id="windowLista" class="container" title="Lista de Alertas">
+	    <ListView id="listaAlertas" defaultItemTemplate="templateAlerts">
+            <Templates>
+				<ItemTemplate name="templateAlerts">
+                    <ImageView bindId="avatar" id="avatar"/>
+                    <Label bindId="listNombre" id="listNombre"/>
+                </ItemTemplate>
+            </Templates>
+            <ListSection name="alerts" headerTitle="Lista de Desaparecidos">
+				
+            </ListSection>
+        </ListView>
+	</Window>
+</Alloy>

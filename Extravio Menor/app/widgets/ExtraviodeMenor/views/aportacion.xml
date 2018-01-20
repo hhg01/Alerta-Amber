@@ -1,0 +1,20 @@
+<Alloy>
+	<Window id="windowAportacion" class="container" title="Aportación de información">
+		<View id="viewParent">
+			<View id="viewSubtitulo">
+				<Label id="lblDescripcion">Descripción de los hechos:</Label>
+			</View>
+			<View id="viewAreaTexto">
+				<TextArea id="textArea"/>
+			</View>
+			<View id="viewBttnAporta">
+				<Button id="bttnEnviarInfo" onClick="enviarAportacion">Enviar</Button>
+			</View>
+		</View>
+		<AlertDialog id="alertDialog" title="" message="Tu aportación fue enviada con éxito." cancel="1">
+            <ButtonNames>
+                <ButtonName>Aceptar</ButtonName>
+            </ButtonNames>
+        </AlertDialog>
+	</Window>
+</Alloy>

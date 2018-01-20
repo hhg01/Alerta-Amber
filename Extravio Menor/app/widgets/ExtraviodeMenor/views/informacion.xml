@@ -1,0 +1,72 @@
+<Alloy>
+	<Window class="container" title="Información">
+		<View id="viewBoleta">
+			<View id="viewFoto">
+				<ImageView id="imageFoto"></ImageView>
+				<View id="datosMenor">
+					<View class="viewDatosMenor">
+						<Label id="lblNombre"></Label>
+					</View>
+					<View class="viewDatosMenor">
+						<Label id="lblFechaNacim">Fecha de Nacimiento: </Label>
+					</View>
+					<View class="viewDatosMenor">
+						<Label id="lblFechaNacimValor"></Label>
+					</View>
+					<!--<View class="viewDatosMenor posicion">
+						<Label id="lblEdad">Edad: </Label>
+						<Label id="lblEdadValor">7 años</Label>
+					</View>-->
+					<View class="viewDatosMenor posicion">
+						<Label id="lblGenero">Género: </Label>
+						<Label id="lblGeneroValor"></Label>
+					</View>
+				</View>
+			</View>
+			<View id="viewScroll">
+				<ScrollView id="scrollView">
+					<View class="viewDescripcion">
+						<Label id="lblTexto" class="formatoSubtitulo">Desaparecio el</Label>
+					</View>
+					<View class="viewDescripcion posicion">
+						<Label id="lblFechaHechValor"></Label>
+					</View>
+					<View class="viewDescripcion">
+						<Label id="lblDescFisica" class="formatoSubtitulo">Descripción física: </Label>
+					</View>
+					<View class="viewDescripcionContenido">
+						<Label id="lblDescFisicaValor"></Label>
+					</View>
+					<View class="viewDescripcion">
+						<Label id="lblSeñas" class="formatoSubtitulo">Señas particulares: </Label>
+					</View>
+					<View class="viewDescripcionContenido">
+						<Label id="lblSeñasValor"></Label>
+					</View>
+					<View class="viewDescripcion">
+						<Label id="lblLugarHechos" class="formatoSubtitulo">Lugar de los hechos: </Label>
+					</View>
+					<View class="viewDescripcionContenido">
+						<Label id="lblLugarHechosValor"></Label>
+					</View>
+					<View class="viewDescripcion">
+						<Label id="lblDescHechos" class="formatoSubtitulo">Descripción de los hechos: </Label>
+					</View>
+					<View class="viewDescripcionContenido">
+						<Label id="lblDescHechosValor"></Label>
+					</View>
+					<View class="viewDescripcion">
+						<Label id="lblPariente" class="formatoSubtitulo">Pariente:</Label>
+					</View>
+					<View class="viewDescripcionContenido">
+						<Label id="lblParentesco"></Label>
+						<Label id="lblTelefono"></Label>
+					</View>
+				</ScrollView>
+			</View>	
+		</View>
+		<View id="viewBoton">
+			<Button onClick="enviarMensaje">Envia Notificación</Button>
+		</View>
+	</Window>
+</Alloy>

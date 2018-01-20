@@ -1,0 +1,52 @@
+//Ventana principal
+".container" : {
+	backgroundColor: "grey",
+	layout: 'vertical'
+}
+//subtitulo
+"#viewParent": {
+	layout: 'vertical',
+	height: '90%'
+}
+
+"#viewSubtitulo": {
+	height: '10%'
+}
+
+"#lblDescripcion": {
+	height: Ti.UI.FILL,
+	width: '100%',
+	font: {
+		fontSize: 16
+	},
+	color: 'black',
+	textAlign: 'left'
+}
+
+"#viewAreaTexto": {
+	top:"5%",
+	borderColor: "black",
+	height: '65%'
+}
+
+"#textArea": {
+	 borderWidth:"2",
+	 borderColor:"black",
+	 borderRadius:"5",
+	 color:"black",
+	 textAlign:"left",
+	 value:"",
+	 width:"100%",
+	 height:"100%",
+	 clearOnEdit: true
+}
+
+//boton
+"#viewBttnAporta": {
+	height: '20%'
+}
+
+"#bttnEnviarInfo": {
+	top:'15%'
+}
+

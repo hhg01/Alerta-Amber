@@ -1,0 +1,12 @@
+<Alloy>
+	<Window class="container">
+		<ScrollView id="scroll">
+			<View id="viewUp">
+				<Widget id="widExtravio" src="ExtraviodeMenor"/>
+			</View>
+			<View id="viewDown">
+				
+			</View>
+		</ScrollView>
+	</Window>
+</Alloy>

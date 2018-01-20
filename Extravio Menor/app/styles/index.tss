@@ -1,0 +1,20 @@
+".container": {
+	backgroundColor:"white",
+	layout:"vertical"
+}
+
+"#scroll":{
+	layout:"vertical"
+}
+
+"#viewUp":{
+	width:Titanium.UI.FILL,
+	height:"50%",
+	layout:"vertical"
+}
+
+"#viewDown":{
+	backgroundColor:"blue",
+	width:Titanium.UI.FILL,
+	height:"50%"
+}

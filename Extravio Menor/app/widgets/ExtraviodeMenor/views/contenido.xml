@@ -1,0 +1,183 @@
+<Alloy>
+	<Window>
+		<ScrollView id="scroll">
+			<View id="menu">
+				<View id="menuBotodesLlamada">
+				</View>
+				<View id="menuBotodesAlertas">
+					<Button id="alertas" onClick="listaAlertas"></Button>
+				</View>
+			</View>
+			<View id="camposFoto">
+				<Label id="camposFotoTitulo"></Label>
+				<ImageView id="camposFotoFoto"></ImageView>
+				<View id="camposFotoBotones">
+					<View class="divisorView">
+						<Button id="camposFotoBotonesCamara"></Button>
+					</View>
+					<View class="divisorView">
+						<Button id="camposFotoBotonesArchivos"></Button>
+					</View>
+				</View>
+			</View>
+			<View id="datosMenor">
+				<Label id="datosMenorTexto"></Label>
+				<View class="datosMenorView">
+					<View class="divisorView">
+						<Label id="nombre"></Label>
+					</View>
+					<View class="divisorView">
+						<TextField id="textNombre"></TextField>
+					</View>
+				</View>
+				<View class="datosMenorView">
+					<View class="divisorView">
+						<Label id="apellido"></Label>
+					</View>
+					<View class="divisorView">
+						<TextField id="textApellido"></TextField>
+					</View>
+				</View>
+				<View class="datosMenorView">
+					<View class="divisorView">
+						<Label id="fechaNacimiento"></Label>
+					</View>
+					<View class="divisorView">
+						<Label id="labelFechaNacimiento" text="DD/MM/AAAA"></Label>
+					</View>
+				</View>
+				<View class="datosMenorView">
+					<View class="divisorView">
+						<Label id="fechaHechos"></Label>
+					</View>
+					<View class="divisorView">
+						<Label id="labelFechaHechos" text="DD/MM/AAAA"></Label>
+					</View>
+				</View>
+				<View class="datosMenorView">
+					<View class="divisorView">
+						<Label id="genero"></Label>
+					</View>
+					<View class="divisorView">	
+						<Picker class="picker" id="pickerGenero" selectionIndicator="true">
+							<PickerColumn>
+								<PickerRow title="--"></PickerRow>
+								<PickerRow title="Masculino"></PickerRow>
+								<PickerRow title="Femenino"></PickerRow>
+							</PickerColumn>
+						</Picker>
+					</View>
+				</View>
+			</View>
+			<View id="descripcionMenor">
+				<View class="descripcionMenorView">
+					<View class="divisorView">
+						<Label id="nacionalidad"></Label>
+					</View>
+					<View class="divisorView">
+						<Picker class="picker" id="pickerNacion" selectionIndicator="true">
+							<PickerColumn>
+								<PickerRow title="--"></PickerRow>
+								<PickerRow title="Mexicana"></PickerRow>
+								<PickerRow title="Extranjera"></PickerRow>
+								<PickerRow title="Ambas"></PickerRow>
+							</PickerColumn>
+						</Picker>
+					</View>
+				</View>
+				<View class="descripcionMenorView">
+					<View class="divisorView">
+						<Label id="cabello"></Label>
+					</View>
+					<View class="divisorView">	
+						<Picker class="picker" id="pickerCabello" selectionIndicator="true">
+							<PickerColumn>
+								<PickerRow title="--"></PickerRow>
+								<PickerRow title="Crespo"></PickerRow>
+								<PickerRow title="Lacio"></PickerRow>
+								<PickerRow title="Ondulado"></PickerRow>
+								<PickerRow title="Sin Cabello"></PickerRow>
+							</PickerColumn>
+						</Picker>
+					</View>
+				</View>
+				<View class="descripcionMenorView">
+					<View class="divisorView">
+						<Label id="colorCabello"></Label>
+					</View>
+					<View class="divisorView">
+						<Picker class="picker" id="pickerColorCabello" selectionIndicator="true">
+							<PickerColumn>
+								<PickerRow title="--"></PickerRow>
+								<PickerRow title="Castaño Claro"></PickerRow>
+								<PickerRow title="Castaño Medio"></PickerRow>
+								<PickerRow title="Castaño Obscuro"></PickerRow>
+								<PickerRow title="Entrecano"></PickerRow>
+								<PickerRow title="Negro"></PickerRow>
+								<PickerRow title="Rojizo"></PickerRow>
+								<PickerRow title="Rubio"></PickerRow>
+								<PickerRow title="Teñido"></PickerRow>
+							</PickerColumn>
+						</Picker>
+					</View>
+				</View>
+				<View class="descripcionMenorView">
+					<View class="divisorView">
+						<Label id="colorOjos"></Label>
+					</View>
+					<View class="divisorView">
+						<Picker class="picker" id="pickerOjos" selectionIndicator="true">
+							<PickerColumn>
+								<PickerRow title="--"></PickerRow>
+								<PickerRow title="Castaño Claro"></PickerRow>
+								<PickerRow title="Castaño Obcuro"></PickerRow>
+								<PickerRow title="Pardos"></PickerRow>
+								<PickerRow title="Grises"></PickerRow>
+								<PickerRow title="Verdes"></PickerRow>
+								<PickerRow title="Azules"></PickerRow>
+							</PickerColumn>
+						</Picker>
+					</View>
+				</View>
+				<View class="descripcionMenorView">
+					<Label id="estatura"></Label>
+					<TextField id="textEstatura"></TextField>
+					<Label id="peso"></Label>
+					<TextField id="textPeso"></TextField>
+				</View>
+			</View>
+			<View id="descripcionHechos">
+				<View class="descripcionMenorView">
+					<Label id="señas"></Label>
+				</View>
+				<View class="descripcionMenorView">
+					<TextArea id="textSeñas"></TextArea>
+				</View>
+				<Label id="textMapa"></Label>
+				<View id="mapa" ns="Alloy.Globals.Map"></View>
+			</View>
+			<View id="datosContacto">
+				<View class="descripcionMenorView">
+					<Label id="descripcion"></Label>
+				</View>
+				<View class="descripcionMenorView">
+					<TextArea id="textDescripcion"></TextArea>
+				</View>
+				<Label id="datosContactoText"></Label>
+				<View class="descripcionMenorView2">
+					<Label id="nombreParentesco"></Label>
+					<TextField id="textNombreP"></TextField>
+				</View>
+				<View class="descripcionMenorView2">
+					<Label id="parentesco"></Label>
+					<TextField id="textParentesco"></TextField>
+				</View>
+				<View class="descripcionMenorView2">
+					<Label id="telefono"></Label>
+					<TextField id="textTelefono"></TextField>
+				</View>	
+				<Button id="botonEnvio">Enviar</Button>
+			</View>
+		</ScrollView>
+	</Window>
+</Alloy>

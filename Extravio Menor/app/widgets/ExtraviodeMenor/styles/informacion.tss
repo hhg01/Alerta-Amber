@@ -1,0 +1,75 @@
+///////////////////////Ventana Principal//////////////////
+".container": {
+	backgroundColor:"grey",
+	layout: 'vertical'
+}
+///////////////////////Boleta con datos del niño////////////////////
+"#viewBoleta": {
+	layout: 'horizontal',
+	width: '100%',
+	height: '80%'
+}
+//*************************view con datos del menor****************************//
+"#viewFoto": {
+	layout: 'vertical',
+	width: '50%',
+	height: '100%'
+}
+//foto del menor
+"#imageFoto": {
+	image:"/images/focusing-target-to-take-a-photo.png",
+	width: '100%',
+	height: '50%'
+}
+//datos del menor
+"#datosMenor":{
+	layout:"vertical",
+	height: '50%',
+	width: '100%'
+}
+".viewDatosMenor":{
+	layout:"vertical",
+	width:"100%",
+	height:"20%"
+}
+".posicion":{
+	layout:"horizontal"
+}
+
+//*************************view con detalles del menor****************************//
+"#viewScroll":{
+	height: '100%',
+	width: "50%",
+}
+"#scrollView": {
+	layout: 'vertical'
+}
+".viewDescripcion":{
+	width:"100%",
+	height:"5%"
+}
+".viewDescripcionContenido": {
+	width: '100%',
+	height: '25%',
+	layout: 'horizontal'
+}
+//etiquetas con información
+"Label": {
+	color: "black",
+	font: {
+		fontSize: 13
+	}
+}
+".formatoSubtitulo":{
+	font: {
+		fontStyle: "italic",
+		fontWeight:  "bold"
+	}
+}
+
+///////////////////////boton Envia Notification/////////////////
+"#viewBoton": {
+	layout: 'vertical',
+	height: '20%',
+	width: '100%'
+}

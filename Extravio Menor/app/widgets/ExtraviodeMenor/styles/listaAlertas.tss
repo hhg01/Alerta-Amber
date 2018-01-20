@@ -1,0 +1,17 @@
+".container" : {
+	backgroundColor:"grey",
+	layout:"vertical"
+}
+"#avatar":{
+	left:"5%",
+	width:"15%",
+	height:"15%"
+}
+"#listNombre":{
+	left:"30%",
+	color:"black",
+	font:{
+		size:30,
+		fontWeight: 'bold'
+	}
+}
