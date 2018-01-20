@@ -1,0 +1,18 @@
+hector@hector-Inspiron-3521:~/Appcelerator_Studio_Workspace/apiExtravioDeMenor$ appc publish -f
+Appcelerator Command-Line Interface, version 6.3.0
+Copyright (c) 2014-2017, Appcelerator, Inc.  All Rights Reserved.
+
+Force is set. I hope you know what you're doing! (This will overwrite components if they exist.)
+Publishing application ... this could take several minutes
+Packaging application ... 
+Deploying application ... 
+Starting application ... 
+Application deployed to https://ac7ad0ddc76ca13d5af57c69f96c597f966cca9d.cloudapp-enterprise.appcelerator.com
+Published api/apiExtravioDeMenor@1.0.0
+
+
+Tips:
+ - Run `appc cloud logcat` to view logs.
+ - Run `appc cloud loglist --build_log` to view the build log.
+ - Run `appc cloud usage` for performance metrics.
+
