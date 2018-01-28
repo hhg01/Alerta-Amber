@@ -1,0 +1,52 @@
+/**************************KEYS********************************/
+var ApiExtravio = require('ApiExtravio');
+    ApiExtravio.port = 8080;
+    // ApiExtravio.domain = 'http://your.domain.com';
+    // Basic Auth.
+    ApiExtravio.Authorization = '0Zx6ABEFZHWsv8xNNdmtYCt0k5rSYtHN';
+    // Production Basic Auth.
+    ApiExtravio.Authorization = 'HdfdAGYpYPJaPWGrRrxcy54GSvPur2tv';
+    // Development Basic Auth.
+    ApiExtravio.Authorization = '0Zx6ABEFZHWsv8xNNdmtYCt0k5rSYtHN';
+    // ApiExtravio.timeout = 30000;
+/*****************************************appc publish -f******************************************
+
+hector@hector-Inspiron-3521:~/Appcelerator_Studio_Workspace/api_extravio$ appc publish -f
+Appcelerator Command-Line Interface, version 6.3.0
+Copyright (c) 2014-2017, Appcelerator, Inc.  All Rights Reserved.
+
+Force is set. I hope you know what you're doing! (This will overwrite components if they exist.)
+Publishing application ... this could take several minutes
+Packaging application ... 
+Deploying application ... 
+Starting application ... 
+Application deployed to https://64d4348df7bea2c2144ad6d007b0c5f4f0e2cdb3.cloudapp-enterprise.appcelerator.com
+Published api/api_extravio@1.0.0
+
+
+Tips:
+ - Run `appc cloud logcat` to view logs.
+ - Run `appc cloud loglist --build_log` to view the build log.
+ - Run `appc cloud usage` for performance metrics.
+hector@hector-Inspiron-3521:~/Appcelerator_Studio_Workspace/api_extravio$ 
+
+******************************************/
+curl -is -X POST -d first_name=pepe -d last_name=pica -d email=qwerty@com -u 0C8qPCphYI2xFMrwFILlyO5gxxZPZrB8: 'http://127.0.0.1:8080/api/testuser'
+
+GET//////////////////////////////////////////////////////////
+curl -u t91AIbyv2SLBniiH5Q5of+rVYNNxSu70: 'https://20d9e4bf203959ef3bf4e56d4dfbdc346350e158.cloudapp-enterprise.appcelerator.com/api/testuser'
+
+
+POST (solo id)//////////////////////////////////////////////////////////////////////
+curl -is -X POST -u t91AIbyv2SLBniiH5Q5of+rVYNNxSu70: 'https://20d9e4bf203959ef3bf4e56d4dfbdc346350e158.cloudapp-enterprise.appcelerator.com/api/testuser'
+
+
+POST///////////////////////////////////////////////////////
+curl -is -X POST -u t91AIbyv2SLBniiH5Q5of+rVYNNxSu70: 'https://20d9e4bf203959ef3bf4e56d4dfbdc346350e158.cloudapp-enterprise.appcelerator.com/api/testuser' -d "first_name=pepe&last_name=pica&email=asdfghcvb"
+
+
+curl -is -X POST -u HdfdAGYpYPJaPWGrRrxcy54GSvPur2tv: 'https://64d4348df7bea2c2144ad6d007b0c5f4f0e2cdb3.cloudapp-enterprise.appcelerator.com/api/testuser' -d "foto=
+
+{"height":684,"type":1,"mimeType":"image/jpeg","text":null,"nativePath":"file:///storage/emulated/0/WhatsApp/Media/WhatsApp Images/IMG-20171201-WA0002.jpg","width":1216,"length":109310,"file":{"writable":false,"executable":false,"nativePath":"content://com.android.providers.media.documents/document/image%3A307950","name":"IMG-20171201-WA0002.jpg","symbolicLink":false,"size":0,"directoryListing":null,"hidden":false,"readonly":true,"parent":null,"apiName":"Ti.Proxy","bubbleParent":true},"apiName":"Ti.Blob","bubbleParent":true}
+
+&nombre=damian&apellidos=huerta&fecha_nacimiento=28/2/2017&fecha_hechos=12/12/2017&genero=masculino&nacionalidad=mexicana&cabello=lacio&color_cabello=negro&color_ojos=negro&estatura=100&peso=9&señas=prueba&direccion=juchipila&descripcion=prueba2&nombrep=hector&parentesco=papa&telefono=5519130846"
